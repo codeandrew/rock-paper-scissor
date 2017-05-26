@@ -1,4 +1,81 @@
+$li-d : 90px;
+$success : #2ecc71;
+$lose : #e74c3c;
+$dark : #333;
+
+$result-pad : 20px;
+
+
 html, body {
   height : 100%;
-  
+  color : $dark;
+  font-family: Raleway;
+}
+section {
+  padding : 10px;
+}
+
+* {
+  transition : .7s;
+}
+.rps {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  h1  {
+    font-weight: bolder;
+  }
+  #enemy-field{
+    margin-bottom: 20px;
+    border-bottom:2px solid $dark ;
+    #enemy-pick{
+      margin: 20px auto;
+      padding-top : 35px;
+      background-color: $dark;
+      color: white;
+      outline : 0 ;
+      width: $li-d;
+      height: $li-d;
+      border-radius : 50%;
+      font-weight: bolder;
+      text-transform: uppercase;
+    }
+  }
+  #choices {
+    ul{
+      li{
+        list-style-type: none;
+        display: inline-block;
+        margin : 20px;
+          button {
+            outline : 0 ;
+            width: $li-d;
+            height: $li-d;
+            border-radius : 50%;
+            font-weight: bolder;
+            text-transform: uppercase;
+          }
+
+      }
+    }
+  }
+
+  #result-field {
+    padding : 20px 0;
+    .lose {
+      background-color: $lose;
+      padding : $result-pad;
+      color : #fff;
+    }
+    .success{
+      background-color: $success;
+      padding : $result-pad;
+      color : #fff;
+    }
+    button {
+        background-color : $dark;
+        color : white;
+        padding : $result-pad;
+    }
+  }
 }

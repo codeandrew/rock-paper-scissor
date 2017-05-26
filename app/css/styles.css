@@ -1,2 +1,56 @@
 html, body {
-  height: 100%; }
+  height: 100%;
+  color: #333;
+  font-family: Raleway; }
+
+section {
+  padding: 10px; }
+
+* {
+  transition: .7s; }
+
+.rps {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center; }
+  .rps h1 {
+    font-weight: bolder; }
+  .rps #enemy-field {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333; }
+    .rps #enemy-field #enemy-pick {
+      margin: 20px auto;
+      padding-top: 35px;
+      background-color: #333;
+      color: white;
+      outline: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      font-weight: bolder;
+      text-transform: uppercase; }
+  .rps #choices ul li {
+    list-style-type: none;
+    display: inline-block;
+    margin: 20px; }
+    .rps #choices ul li button {
+      outline: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      font-weight: bolder;
+      text-transform: uppercase; }
+  .rps #result-field {
+    padding: 20px 0; }
+    .rps #result-field .lose {
+      background-color: #e74c3c;
+      padding: 20px;
+      color: #fff; }
+    .rps #result-field .success {
+      background-color: #2ecc71;
+      padding: 20px;
+      color: #fff; }
+    .rps #result-field button {
+      background-color: #333;
+      color: white;
+      padding: 20px; }
