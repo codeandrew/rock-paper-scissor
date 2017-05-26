@@ -3,28 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title>Rock Paper Scissors</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
     <link rel="stylesheet" href="app/css/styles.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <div id="choices">
-            <ul>
 
-            </ul>
-            <p id="myScore">1</p>
+    <section class="rps">
+      <div class="container-fluid">
+        <h1>Rock vs Paper vs Scissor!</h1>
+        <p>Race to 5 wins</p>
+        <div class="row">
+          <div id="enemy-field">
+            <h3>Opponent</h3>
+            <div id="enemy-pick">
+              enemy
+            </div>
+            <p id="escore">1</p>
           </div>
         </div>
-        <div class="col-sm-6">
-          second half
-          <p id="escore">1</p>
+
+        <div class="row">
+          <div id="choices">
+            <ul></ul>
+            <p id="myScore">1</p>
+          </div>
+          <div id="result-field">
+            <p id="result"></p>
+            <p id="next-round"></p>
+            <p id="new-game"></p>
+          </div>
         </div>
+
       </div>
-    </div>
+    </section>
   <script src="app/js/main.js"></script>
   </body>
 </html>
