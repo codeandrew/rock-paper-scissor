@@ -42,6 +42,9 @@ section {
       text-transform: uppercase; }
   .rps #result-field {
     padding: 20px 0; }
+    .rps #result-field #result {
+      letter-spacing: 1.5px;
+      font-weight: bolder; }
     .rps #result-field .lose {
       background-color: #e74c3c;
       padding: 20px;

@@ -62,6 +62,12 @@ section {
 
   #result-field {
     padding : 20px 0;
+    #result{
+      letter-spacing: 1.5px;
+      font-weight: bolder;
+      
+    }
+
     .lose {
       background-color: $lose;
       padding : $result-pad;
