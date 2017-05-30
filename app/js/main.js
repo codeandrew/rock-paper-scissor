@@ -7,17 +7,24 @@ var enemyPick = entry[Math.floor(Math.random() * entry.length)];
 var l = function(msg){console.log(msg);};
 var choices = document.querySelector('#choices ul');
 var i;
-var myScore = document.getElementById('myScore');
-var eScore = document.getElementById('escore');
-var roundResult = [
-  'You win this round!',
-  'You lose this round!'
-];
-var scores = [0,0];
-var result = document.getElementById('result');
-var resultField = document.getElementById('result-field');
-var nextRound = document.getElementById('next-round');
-var enemyFloor = document.getElementById('enemy-pick');
+var roundResult = {
+win:  'You win this round!',
+lose:  'You lose this round!',
+draw:   'This is a draw'
+};
+var scores = {
+  me : 0,
+  opponent : 0
+};
+
+var html = {
+  myScore : document.getElementById('myScore'),
+  eScore : document.getElementById('escore'),
+  result : document.getElementById('result'),
+  resultField : document.getElementById('result-field'),
+  nextRound : document.getElementById('next-round'),
+  enemyFloor : document.getElementById('enemy-pick'),
+}
 
 l('enemy pick: ' + enemyPick);
 
@@ -26,92 +33,90 @@ l('enemy pick: ' + enemyPick);
     choices.innerHTML +=
     '<li><button>'+ entry[i]+ '</button></li>';
   }
-  myScore.textContent = 'My Score: ' + scores[0];
-  eScore.textContent = 'Opponent Score: ' + scores[1];
+  html.myScore.textContent = 'My Score: ' + scores.me;
+  html.eScore.textContent = 'Opponent Score: ' + scores.opponent;
 }());
 
 var entryChoice = document.querySelectorAll('#choices ul li button');
 
 for(i=0; i < entryChoice.length; i++){
   entryChoice[i].addEventListener('click',function(){
-    result.innerHTML = compete(event.target.innerHTML);
+    html.result.innerHTML = compete(event.target.innerHTML);
 
-    enemyFloor.innerHTML = enemyPick;
+    html.enemyFloor.innerHTML = enemyPick;
     for(i=0;i < entryChoice.length; i++){
       entryChoice[i].disabled = true;
     }// this disables the entry choices to be clicked
 
-    nextRound.innerHTML = '<button> Next Round</button>';
-    nextRound.getElementsByTagName('BUTTON')[0]
+    html.nextRound.innerHTML = '<button> Next Round</button>';
+    html.nextRound.getElementsByTagName('BUTTON')[0]
     .addEventListener('click', function(){
        for(i=0;i < entryChoice.length; i++){
         entryChoice[i].disabled = false;
       }
       enemyPick = entry[Math.floor(Math.random() * entry.length)];
       // to reset the enemy Pick
-      enemyFloor.innerHTML = '';
+      html.enemyFloor.innerHTML = '';
     });
     throwResult();
   });
 }
 
 function compete(pick){
-  if (enemyPick == pick){
-    return 'This is a draw';
-  }else if(enemyPick == entry[0]){
-    return pick == entry[1]? roundResult[0]:roundResult[1];
-  }else if(enemyPick == entry[1]){
-    return pick == entry[2]? roundResult[0]:roundResult[1];
-  }else if (enemyPick == entry[2]){
-    return pick == entry[0]? roundResult[0]:roundResult[1];
-  }
+  if (enemyPick == pick)
+    return roundResult.draw;
+  if(enemyPick == entry[0])
+    return pick == entry[1] ? roundResult.win : roundResult.lose;
+  if(enemyPick == entry[1])
+    return pick == entry[2] ? roundResult.win : roundResult.lose;
+  if (enemyPick == entry[2])
+    return pick == entry[0] ? roundResult.win : roundResult.lose;
 }
 
 function throwResult(){
   console.log('changing result and checking win')
-  if (result.innerHTML == roundResult[0]) {
-    scores[0] += 1;
-    myScore.textContent = 'My Score: ' +scores[0];
-    result.classList.remove('success','lose');
-    result.classList.add('success');
-  }else if (result.innerHTML == roundResult[1]) {
-    scores[1] += 1;
-    eScore.textContent = 'Opponent Score: ' + scores[1];
-    result.classList.remove('success','lose');
-    result.classList.add('lose');
+  var winRound = html.result.innerHTML == roundResult.win;
+  html.result.classList.remove('success','lose');
+
+  if(html.result.innerHTML != roundResult.draw){
+      html.result.classList.add(winRound ? 'success' : 'lose');
+      winRound ? scores.me += 1 : scores.opponent += 1 ;
   }
-  if (scores[0] ==  5 || scores[1] == 5){
-    nextRound.innerHTML = ''; // to remove the nextRound button
-    scores[0] == 5 ? win() : lose();
+
+  //update Scores
+  html.myScore.textContent = 'My Score: ' + scores.me;
+  html.eScore.textContent = 'Opponent Score: ' + scores.opponent;
+
+  if (scores.me ==  5 || scores.opponent == 5){
+    html.nextRound.innerHTML = ''; // to remove the nextRound button
+    scores.me == 5 ? win() : lose();
     startNewGame();
   }
 }
 
 function win(){
   alert('win, click new game');
-  result.innerHTML = 'Congratulations You Win!';
+  html.result.innerHTML = 'Congratulations You Win!';
 }
 function lose(){
   alert('lose, click new game');
-  result.innerHTML = 'LOSER!!!';
+  html.result.innerHTML = 'LOSER!!!';
 }
 
 function startNewGame(){
   var newGame = document.getElementById('new-game');
-  //nextRound.getElementsByTagName('BUTTON')[0].disa  ble = true;
-  nextRound.innerHTML = null ;
-  resultField.getElementsByTagName("P")[1].innerHTML= null;
+  html.nextRound.innerHTML = null ;
+  html.resultField.getElementsByTagName("P")[1].innerHTML= null;
   newGame.innerHTML = '<button>New Game</button>';
   newGame.getElementsByTagName('BUTTON')[0]
   .addEventListener('click', function(){
-
-
-    scores = [0,0];
-    myScore.textContent = 'My Score: ' + scores[0];
-    eScore.textContent = 'Opponent Score: ' + scores[1];
-    result.innerHTML = '';
-    result.classList.remove('success', 'lose');
-    nextRound.innerHTML = null;
+    scores.me = 0;
+    scores.opponent = 0;
+    html.myScore.textContent = 'My Score: ' + scores.me;
+    html.eScore.textContent = 'Opponent Score: ' + scores.opponent;
+    html.result.innerHTML = '';
+    html.result.classList.remove('success', 'lose');
+    html.nextRound.innerHTML = null;
     for(i=0;i < entryChoice.length; i++){
      entryChoice[i].disabled = false;
    }
