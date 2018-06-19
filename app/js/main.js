@@ -1,23 +1,23 @@
-var entry = [
+const entry = [
   'rock',
   'paper',
   'scissor'
 ];
-var enemyPick = entry[Math.floor(Math.random() * entry.length)];
-var l = function(msg){console.log(msg);};
-var choices = document.querySelector('#choices ul');
-var i;
-var roundResult = {
-win:  'You win this round!',
-lose:  'You lose this round!',
-draw:   'This is a draw'
+let enemyPick = entry[Math.floor(Math.random() * entry.length)];
+const l = msg => console.log(msg);
+const choices = document.querySelector('#choices ul');
+let i;
+const roundResult = {
+  win:  'You win this round!',
+  lose:  'You lose this round!',
+  draw:   'This is a draw'
 };
-var scores = {
+let scores = {
   me : 0,
   opponent : 0
 };
 
-var html = {
+const html = {
   myScore : document.getElementById('myScore'),
   eScore : document.getElementById('escore'),
   result : document.getElementById('result'),
@@ -37,7 +37,7 @@ l('enemy pick: ' + enemyPick);
   html.eScore.textContent = 'Opponent Score: ' + scores.opponent;
 }());
 
-var entryChoice = document.querySelectorAll('#choices ul li button');
+const entryChoice = document.querySelectorAll('#choices ul li button');
 
 for(i=0; i < entryChoice.length; i++){
   entryChoice[i].addEventListener('click',function(){
@@ -75,7 +75,7 @@ function compete(pick){
 
 function throwResult(){
   console.log('changing result and checking win')
-  var winRound = html.result.innerHTML == roundResult.win;
+  const winRound = html.result.innerHTML == roundResult.win;
   html.result.classList.remove('success','lose');
 
   if(html.result.innerHTML != roundResult.draw){
@@ -104,7 +104,7 @@ function lose(){
 }
 
 function startNewGame(){
-  var newGame = document.getElementById('new-game');
+  let newGame = document.getElementById('new-game');
   html.nextRound.innerHTML = null ;
   html.resultField.getElementsByTagName("P")[1].innerHTML= null;
   newGame.innerHTML = '<button>New Game</button>';
